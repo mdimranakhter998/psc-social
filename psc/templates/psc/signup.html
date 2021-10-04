@@ -1,0 +1,99 @@
+{%  extends './index.html'%}
+{% load static %}
+{% block title %}signup{% endblock title %}
+{% block body %}
+<div class="container mt-5 mb-5">
+    <form action="{% url 'signup' %}" method="POST" id="signin">{% csrf_token %}
+		<div class="pt-5"><h2>Sign Up</h2></div>		
+		<hr>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-6 alert alert-danger pl-2" role="alert" id="fnamealert" style="display:none;">enter your First Name</div>
+			    <div class="col-6 alert alert-danger" role="alert" id="lnamealert" style="display:none;">enter your Last Name</div>
+            </div>   
+             <div class="row">          
+                    <div class="col"><input type="text" class="form-control" id="fname" name="fname" placeholder="First Name"></div>
+                    <div class="col"><input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name"></div>
+			</div>        	
+        </div>
+        <div class="form-group pt-4">
+            <div class="alert alert-danger" role="alert" id="emailalert" style="display:none;">email is required!</div>
+        	<input type="email" class="form-control" name="email" id="email" placeholder="Email">
+        </div>
+		<div class="form-group pt-4"> 
+            <div class="alert alert-danger " role="alert" id="passwordalert" style="display: none;">password must be 8-15 character least one lowercase letter, one uppercase letter, one numeric digit, and one special character!</div>           
+            <input type="password" class="form-control" name="password" id="password" placeholder="Password" >
+        </div>
+		<div class="form-group pt-4">
+            <div class="alert alert-danger" role="alert" id="confirm_passwordalert" style="display: none;">password is not match!</div>
+            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Confirm Password">
+        </div>        
+        <div class="form-group pt-4">
+			<label class="form-check-label"><input type="checkbox"> Terms of Use &amp;Privacy Policy</label>
+		</div>
+		<div class="form-group pt-4">
+            <button type="submit" class="btn btn-primary btn-lg">Sign Up</button>
+        </div>
+        <div>
+            <p>Already have an Account?<span><a class="text-decoration-none" href="{% url 'signin' %}">Sign In</a></span></p>
+
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    var signin=document.getElementById("signin");
+    var fname=document.getElementById("fname");
+    var lname=document.getElementById("lname")
+    var email=document.getElementById("email");
+    var password=document.getElementById("password");
+    var confirm_password=document.getElementById("confirm_password");
+    var fnamealert=document.querySelector("#fnamealert");
+    var lnamealert=document.querySelector("#lnamealert");
+    var emailalert=document.querySelector("#emailalert");
+    var passwordalert=document.querySelector("#passwordalert");
+    var confirm_passwortalert=document.querySelector("#confirm_passwordalert");
+    var passwordrequired= /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/;
+    var flag=1;    
+    signin.addEventListener('submit',function(e){
+        e.preventDefault();           
+        if(fname.value.trim().length==0){
+            flag=0;
+            fnamealert.setAttribute("style","display:block");
+        }
+        else
+            fnamealert.setAttribute("style","display:none");
+    
+        if(lname.value.trim().length==0){
+            flag=0;
+            lnamealert.setAttribute("style","display:block");
+        }
+        else
+            lnamealert.setAttribute("style","display:none");
+        if(email.value.trim().length==0){
+            flag=0;
+            emailalert.setAttribute("style","display:block");
+        }     
+        else
+            emailalert.setAttribute("style","display:none");   
+        if(password.value.match(passwordrequired)){
+            flag=0;
+            passwordalert.setAttribute("style","display:block");
+        }
+        else
+            passwordalert.setAttribute("style","display:none");
+        if(flag) {
+            alert('hello');
+            signin.submit();
+        }
+
+    })
+    confirm_password.addEventListener('keyup',function(e){
+        if(password.value!=confirm_password.value)
+            confirm_passwordalert.setAttribute('style','display:block');
+        else
+            confirm_passwordalert.setAttribute('style','display:none');
+    })
+</script>
+
+{% endblock body %} 
+

@@ -1,0 +1,31 @@
+{%  extends './index.html'%}
+{% load static %}
+{% block title %}signin{% endblock title %}
+{% block body %}
+
+<div class="container mt-5 ">
+    <form action="{% url 'signin' %}" method="post">{% csrf_token %}
+        <div class="pt-5"><h1>Sign in</h1> </div>
+        
+        <div class="form-group pt-3">
+            <input type="text" class="form-control" placeholder="Username" name="email" required="required">
+        </div>
+        <div class="form-group pt-3 pb-3">
+            <input type="password" class="form-control" placeholder="Password" name="password" required="required">
+        </div>
+        
+        <input type="submit" class="btn btn-primary btn-block d-flex" value="Login">        
+        <div class="d-flex justify-content-center">
+            <p> Don't have an account yet?<span><a href="{% url 'signup' %}" class="text-decoration-none">SignUp</a></span></p>
+            
+        </div>
+        <div class="text-center  mb-3 d-flex justify-content-center">
+            <a href="#" class="text-decoration-none ">Forgot Your password?</a>
+            
+        </div>
+       
+
+       
+    </form>
+</div>
+{% endblock body %}
