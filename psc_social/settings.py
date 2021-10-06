@@ -51,6 +51,8 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
+DISABLE_COLLECTSTATIC=1
+
 ROOT_URLCONF = 'psc_social.urls'
 
 TEMPLATES = [
