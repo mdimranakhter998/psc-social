@@ -1,0 +1,1 @@
+web:waitress-server --port=$PORT psc_social-master.wsgi:application
