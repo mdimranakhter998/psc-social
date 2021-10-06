@@ -1,1 +1,1 @@
-web: waitress-serve --port=$PORT psc_social-master.wsgi:application
+web: waitress-serve --port=$PORT psc_social.wsgi:application
