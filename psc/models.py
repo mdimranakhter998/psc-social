@@ -15,8 +15,13 @@ class SignUp(models.Model):
     last_name=models.CharField(max_length=150,null=False)
     email=models.EmailField(max_length=200,unique=True,null=False)
     password=models.CharField(max_length=150,null=False)
+    def __str__(self):
+        return self.email
 
-#token model form
-class Token(models.Model):
+#Profile model form
+class Profile(models.Model):
+    user=models.OneToOneField(SignUp,on_delete=models.CASCADE)
     token=models.CharField(max_length=100, null=False)
-    email=models.EmailField(max_length=100,unique=True,null=False)
+    is_verified=models.BooleanField(default=False)
+    created_date=models.DateTimeField(auto_now_add=True)
+    
